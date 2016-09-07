@@ -1,7 +1,8 @@
 #!/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/monitor/scripts
 service=(httpd ntpd apache)
-
+emaildir=/tmp/email.txt
+email=gernelrodavia@gmail.com
 for i in "${service[@]}"
 do
         if ps ax | grep -v grep | grep $i > /dev/null
@@ -9,7 +10,9 @@ do
                 echo "$i is running!!!"
                 else
                 echo "$i is on stop status, Restarting $i"
+                message=$(echo -e " $i is on stop Status." > $emaildir
+                date=$(date + '%y%m%d %H:%M')
+                sendmail "$date Service check" $email <
                 systemctl start $i
         fi
 done
-
