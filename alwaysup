@@ -1,6 +1,6 @@
 #!/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/monitor/scripts
-service=(httpd ntpd apache)
+service=(httpd ntpd)
 emaildir=/tmp/email.txt
 email=gernelrodavia@gmail.com
 for i in "${service[@]}"
