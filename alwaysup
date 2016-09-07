@@ -10,9 +10,9 @@ do
                 echo "$i is running!!!"
                 else
                 echo "$i is on stop status, Restarting $i"
-                message=$(echo -e " $i is on stop Status." > $emaildir)
                 date=$(date + '%y%m%d %H:%M')
-                echo -e "Subject: Service status" | sendmail $email < $emaildir
+                message=$(echo -e " $i is on stop Status $date." > $emaildir)
+                sendmail $email < $emaildir
                 systemctl start $i
         fi
 done
