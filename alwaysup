@@ -1,9 +1,15 @@
 #!/bin/bash
-service=httpd
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/monitor/scripts
+service=(httpd ntpd apache)
 
-if (( $(ps -ef | grep -v grep | grep $service | wc -l) > 0 ))
-then
-echo "$service is running!!!"
-else
-systemctl start $service
-fi
+for i in "${service[@]}"
+do
+        if ps ax | grep -v grep | grep $i > /dev/null
+                then
+                echo "$i is running!!!"
+                else
+                echo "$i is on stop status, Restarting $i"
+                systemctl start $i
+        fi
+done
+
